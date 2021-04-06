@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--开启日志功能-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <typeAliases>
+        <package name="stu.wbw.pojo"/>
+    </typeAliases>
+    <!-- 每一个mapper都需要在<mappers>中注册-->
+    <mappers>
+        <package name="stu.wbw.mapper"/>
+    </mappers>
+</configuration>

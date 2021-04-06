@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stu.wbw.mapper.ProductImageMapper">
+
+    <insert id="addProductImage" parameterType="ProductImage" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into tmall_ssm.product_image(product_id) values (#{product_id})
+    </insert>
+
+    <delete id="deleteProductImageById" parameterType="Integer">
+        delete from tmall_ssm.product_image where id=#{id}
+    </delete>
+
+    <delete id="deleteProductImageByProductId" parameterType="Integer">
+        delete from tmall_ssm.product_image where product_id=#{product_id}
+    </delete>
+
+    <update id="updateProductImage" >
+        update tmall_ssm.product_image set product_id = #{product_id} where id=#{id};
+    </update>
+
+    <select id="queryProductImageById" parameterType="Integer" resultType="ProductImage">
+        select * from tmall_ssm.product_image where id=#{id}
+    </select>
+
+    <select id="queryAllProductImageByProductId" resultType="ProductImage">
+        select * from tmall_ssm.product_image where product_id=#{product_id}
+    </select>
+
+</mapper>

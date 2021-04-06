@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stu.wbw.mapper.PropertyMapper">
+
+    <insert id="addProperty" parameterType="Property" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into tmall_ssm.property(name, category_id) VALUES (#{name},#{category_id})
+    </insert>
+
+    <delete id="deleteProperty" parameterType="Integer">
+        delete from tmall_ssm.property where id=#{id}
+    </delete>
+
+    <update id="updateProperty" parameterType="Property">
+        update tmall_ssm.property set name=#{name},category_id=#{category_id} where id=#{id}
+    </update>
+
+    <select id="queryProperty" parameterType="Integer" resultType="Property">
+        select * from tmall_ssm.property where id=#{id}
+    </select>
+
+    <select id="queryAllProperty" resultType="Property">
+        select * from tmall_ssm.property
+    </select>
+
+    <select id="queryAllPropertyByCategoryId" resultType="Property" parameterType="Integer">
+        select * from tmall_ssm.property where category_id=#{category_id}
+    </select>
+
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stu.wbw.mapper.ReviewMapper">
+
+    <insert id="addReview" parameterType="Review" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into tmall_ssm.review(content, user_id, product_id, createDate) values (#{content},#{user_id},#{product_id},#{createDate});
+    </insert>
+
+    <delete id="deleteReviewById" parameterType="Integer">
+        delete from tmall_ssm.review where id=#{id}
+    </delete>
+
+    <update id="updateReview" parameterType="Review">
+        update tmall_ssm.review set content=#{content},user_id=#{user_id},product_id=#{product_id},createDate=#{createDate} where id=#{id}
+    </update>
+
+    <select id="queryReviewById" parameterType="Integer" resultType="Review">
+        select * from tmall_ssm.review where id=#{id};
+    </select>
+
+    <select id="queryAllReview" resultType="Review">
+        select * from tmall_ssm.review;
+    </select>
+
+    <select id="queryReviewByProductId" parameterType="Integer" resultType="Review">
+        select * from tmall_ssm.review where product_id=#{product_id} order by id desc
+    </select>
+
+    <select id="getReviewCount" parameterType="Integer" resultType="Integer">
+        select count(1) from tmall_ssm.review where product_id=#{product_id}
+    </select>
+
+</mapper>

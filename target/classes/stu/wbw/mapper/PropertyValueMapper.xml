@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stu.wbw.mapper.PropertyValueMapper">
+
+    <insert id="addPropertyValue" parameterType="PropertyValue" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into tmall_ssm.property_value(product_id, property_id,value) VALUES
+        (#{product_id},#{property_id},#{value})
+    </insert>
+
+    <delete id="deletePropertyValueById" parameterType="Integer">
+        delete from tmall_ssm.property_value where id=#{id}
+    </delete>
+
+    <delete id="deletePropertyByProductId" parameterType="Integer">
+        delete from tmall_ssm.property_value where product_id=#{product_id}
+    </delete>
+
+    <update id="updatePropertyValue">
+        update tmall_ssm.property_value set product_id=#{product_id},property_id=#{property_id},value=#{value} where id=#{id}
+    </update>
+
+    <select id="queryPropertyValueById" parameterType="Integer" resultType="PropertyValue">
+        select * from tmall_ssm.property_value where id=#{id};
+    </select>
+
+    <select id="queryAllPropertyValue" resultType="PropertyValue">
+        select * from tmall_ssm.property_value;
+    </select>
+
+    <select id="queryByProductIdAndPropertyId" parameterType="Integer" resultType="PropertyValue">
+        select * from tmall_ssm.property_value where product_id=#{product_id} and property_id=#{property_id}
+    </select>
+
+    <select id="queryByProductId" resultType="PropertyValue" parameterType="Integer">
+        select * from tmall_ssm.property_value where product_id=#{product_id}
+    </select>
+
+
+</mapper>
