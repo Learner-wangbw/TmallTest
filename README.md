@@ -49,7 +49,9 @@ Tomcat9.0+JDK1.8+Mysql5.5
 
 - 产品的图片是默认放置在 `img/product/产品的id号/` 目录下的，并且默认的五张图片分别为：1.jpg、2.jpg.....5.jpg，用于默认显示的图片均为 1.jpg
 
+
 ## 前台页面
+（图片看不见可以查看images-folder）
 
 > 1.首页
 
