@@ -352,7 +352,7 @@
                                     </a>
                                 </c:if>
                                 <c:if test="${o.status=='waitPay'}">
-                                    <a href="alipay.jsp?order_id=${o.id}&total=${o.total}">
+                                    <a href="${pageContext.request.contextPath}/payed?order_id=${o.id}&total=${o.total}">
                                         <button class="orderListItemConfirm">付款</button>
                                     </a>
                                 </c:if>
