@@ -5,7 +5,23 @@
 <mapper namespace="stu.wbw.mapper.ReferalLinkMapper">
 
     <insert id="addReferalLink" parameterType="ReferalLink" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        insert into tmall_ssm.referal_link(text, link) values (#{text},#{link});
+        insert into referal_link
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="text != null">
+                text,
+            </if>
+            <if test="link != null">
+                link,
+            </if>
+        </trim>
+        <trim prefix=" values (" suffix=")" suffixOverrides=",">
+            <if test="text != null">
+                #{text},
+            </if>
+            <if test="link != null">
+                #{link},
+            </if>
+        </trim>
     </insert>
 
     <delete id="deleteReferalLink" parameterType="Integer">
@@ -13,7 +29,16 @@
     </delete>
 
     <update id="updateReferalLink" parameterType="ReferalLink">
-        update tmall_ssm.referal_link set text=#{text},link=#{link} where id=#{id}
+        update referal_link
+        <set>
+            <if test="text != null">
+                text = #{text},
+            </if>
+            <if test="link != null">
+                link = #{link},
+            </if>
+        </set>
+        where id = #{id}
     </update>
 
     <select id="queryReferalLinkById" parameterType="Integer" resultType="ReferalLink">

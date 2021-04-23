@@ -5,7 +5,17 @@
 <mapper namespace="stu.wbw.mapper.CategoryMapper">
 
     <insert id="addCategory" parameterType="Category" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        insert into tmall_ssm.category(name) values (#{name})
+        insert into category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                name,
+            </if>
+        </trim>
+        <trim prefix=" values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name},
+            </if>
+        </trim>
     </insert>
 
     <delete id="deleteCategoryById" parameterType="Integer">
@@ -13,7 +23,13 @@
     </delete>
 
     <update id="updateCategory" parameterType="Category">
-        update tmall_ssm.category set name=#{name} where id=#{id}
+        update category
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+        </set>
+        where id = #{id}
     </update>
 
     <resultMap id="categoryMap" type="Category">

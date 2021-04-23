@@ -22,8 +22,8 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="product_id != null">
-                #{product_id},
-            </if>
+            #{product_id},
+        </if>
             <if test="order_id != null">
                 #{order_id},
             </if>
@@ -41,8 +41,22 @@
     </delete>
 
     <update id="updateOrderItem" parameterType="OrderItem">
-        update tmall_ssm.order_item set product_id=#{product_id},order_id=#{order_id},user_id=#{user_id},number=#{number}
-        where id=#{id}
+        update order_item
+        <set>
+            <if test="product_id != null">
+                product_id = #{product_id},
+            </if>
+            <if test="order_id != null">
+                order_id = #{order_id},
+            </if>
+            <if test="user_id != null">
+                user_id = #{user_id},
+            </if>
+            <if test="number != null">
+                number = #{number},
+            </if>
+        </set>
+        where id = #{id}
     </update>
 
     <select id="queryOrderItemById" parameterType="Integer" resultType="OrderItem">

@@ -5,7 +5,17 @@
 <mapper namespace="stu.wbw.mapper.ProductImageMapper">
 
     <insert id="addProductImage" parameterType="ProductImage" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        insert into tmall_ssm.product_image(product_id) values (#{product_id})
+        insert into product_image
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="product_id != null">
+                product_id,
+            </if>
+        </trim>
+        <trim prefix=" values (" suffix=")" suffixOverrides=",">
+            <if test="product_id != null">
+                #{product_id},
+            </if>
+        </trim>
     </insert>
 
     <delete id="deleteProductImageById" parameterType="Integer">
@@ -17,7 +27,13 @@
     </delete>
 
     <update id="updateProductImage" >
-        update tmall_ssm.product_image set product_id = #{product_id} where id=#{id};
+        update product_image
+        <set>
+            <if test="product_id != null">
+                product_id = #{product_id},
+            </if>
+        </set>
+        where id = #{id}
     </update>
 
     <select id="queryProductImageById" parameterType="Integer" resultType="ProductImage">

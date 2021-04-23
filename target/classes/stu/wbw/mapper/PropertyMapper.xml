@@ -5,7 +5,23 @@
 <mapper namespace="stu.wbw.mapper.PropertyMapper">
 
     <insert id="addProperty" parameterType="Property" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        insert into tmall_ssm.property(name, category_id) VALUES (#{name},#{category_id})
+        insert into property
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                name,
+            </if>
+            <if test="category_id != null">
+                category_id,
+            </if>
+        </trim>
+        <trim prefix=" values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="category_id != null">
+                #{category_id},
+            </if>
+        </trim>
     </insert>
 
     <delete id="deleteProperty" parameterType="Integer">
@@ -13,7 +29,16 @@
     </delete>
 
     <update id="updateProperty" parameterType="Property">
-        update tmall_ssm.property set name=#{name},category_id=#{category_id} where id=#{id}
+        update property
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="category_id != null">
+                category_id = #{category_id},
+            </if>
+        </set>
+        where id = #{id}
     </update>
 
     <select id="queryProperty" parameterType="Integer" resultType="Property">

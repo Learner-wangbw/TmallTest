@@ -5,8 +5,47 @@
 <mapper namespace="stu.wbw.mapper.ProductMapper">
 
     <insert id="addProduct" parameterType="Product" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        insert into tmall_ssm.product(name, sub_title, price, sale, stock, category_id)
-        values (#{name},#{sub_title},#{price},#{sale},#{stock},#{category_id});
+        insert into product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                name,
+            </if>
+            <if test="sub_title != null">
+                sub_title,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="sale != null">
+                sale,
+            </if>
+            <if test="stock != null">
+                stock,
+            </if>
+            <if test="category_id != null">
+                category_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="sub_title != null">
+                #{sub_title},
+            </if>
+            <if test="price != null">
+                #{price},
+            </if>
+            <if test="sale != null">
+                #{sale},
+            </if>
+            <if test="stock != null">
+                #{stock},
+            </if>
+            <if test="category_id != null">
+                #{category_id},
+            </if>
+        </trim>
     </insert>
 
     <delete id="deleteProduct" parameterType="Integer">
@@ -14,8 +53,28 @@
     </delete>
 
     <update id="updateProduct" parameterType="Product">
-        update tmall_ssm.product set name=#{name},sub_title=#{sub_title},price=#{price}
-        ,sale=#{sale},stock=#{stock},category_id=#{category_id} where id=#{id}
+        update product
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="sub_title != null">
+                sub_title = #{sub_title},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="sale != null">
+                sale = #{sale},
+            </if>
+            <if test="stock != null">
+                stock = #{stock},
+            </if>
+            <if test="category_id != null">
+                category_id = #{category_id},
+            </if>
+        </set>
+        where id = #{id}
     </update>
 
     <select id="queryProductById" parameterType="Integer" resultType="Product">

@@ -5,7 +5,35 @@
 <mapper namespace="stu.wbw.mapper.ReviewMapper">
 
     <insert id="addReview" parameterType="Review" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        insert into tmall_ssm.review(content, user_id, product_id, createDate) values (#{content},#{user_id},#{product_id},#{createDate});
+        insert into review
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="content != null">
+                content,
+            </if>
+            <if test="user_id != null">
+                user_id,
+            </if>
+            <if test="product_id != null">
+                product_id,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="content != null">
+                #{content},
+            </if>
+            <if test="user_id != null">
+                #{user_id},
+            </if>
+            <if test="product_id != null">
+                #{product_id},
+            </if>
+            <if test="createDate != null">
+                #{createDate},
+            </if>
+        </trim>
     </insert>
 
     <delete id="deleteReviewById" parameterType="Integer">
@@ -13,7 +41,22 @@
     </delete>
 
     <update id="updateReview" parameterType="Review">
-        update tmall_ssm.review set content=#{content},user_id=#{user_id},product_id=#{product_id},createDate=#{createDate} where id=#{id}
+        update review
+        <set>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="user_id != null">
+                user_id = #{user_id},
+            </if>
+            <if test="product_id != null">
+                product_id = #{product_id},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate},
+            </if>
+        </set>
+        where id = #{id}
     </update>
 
     <select id="queryReviewById" parameterType="Integer" resultType="Review">
