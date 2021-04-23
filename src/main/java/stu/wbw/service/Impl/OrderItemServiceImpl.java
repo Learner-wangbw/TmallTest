@@ -55,7 +55,7 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     //注意:该查询是查询该user_id下并且order_id为空的数据
-    //因为购物车中的产品无订单
+    //因为购物车中的产品无订单id
     @Override
     public List<OrderItem> queryAllOrderItemByUserIdForCart(Integer user_id) {
         List<OrderItem> orderItems = orderItemMapper.queryAllOrderItemByUserIdForCart(user_id);

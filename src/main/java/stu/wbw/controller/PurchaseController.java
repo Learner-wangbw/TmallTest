@@ -128,7 +128,7 @@ public class PurchaseController {
         User user = (User) session.getAttribute("user");
         boolean found = false;
 
-        List<OrderItem> ois = orderItemService.queryAllOrderItemByUserId(user.getId());
+        List<OrderItem> ois = orderItemService.queryAllOrderItemByUserIdForCart(user.getId());
         for (OrderItem oi : ois) {
             if (oi.getProduct().getId().intValue() == p.getId().intValue()) {
                 oi.setNumber(oi.getNumber() + num);
